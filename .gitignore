@@ -1,3 +1,4 @@
 *.flac
 *.json
 tmp_audios/
+/nbproject/private/
