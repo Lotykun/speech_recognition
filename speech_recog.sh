@@ -15,16 +15,7 @@ while [  $RESPONSE != "Salir programa" ]; do
 
         ENCODED_AUDIO=$(base64 $AUDIO_FILE -w 0)
 
-        echo "{
-          'config': {
-              'encoding':'FLAC',
-              'sampleRate': 16000,
-              'languageCode': 'es-ES'
-          },
-          'audio': {
-              'content':'$ENCODED_AUDIO'
-          }
-        }" > $PROJECT_PATH/request.json
+        echo "{'config': {'encoding':'FLAC','sampleRate': 16000,'languageCode': 'es-ES'},'audio': {'content':'$ENCODED_AUDIO'}}" > $PROJECT_PATH/request.json
 
         curl -s -k -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" https://speech.googleapis.com/v1beta1/speech:syncrecognize -d @request.json > $PROJECT_PATH/response.json
         #curl -s -k -H "Content-Type: application/json" -H "Authorization: Bearer $TOKEN" https://speech.googleapis.com/v1beta1/speech:syncrecognize -d @request.json
