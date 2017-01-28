@@ -2,5 +2,5 @@
 *.json
 tmp_audios/
 config.php
-speech_recog_test.sh
+*test*
 /nbproject/private/
