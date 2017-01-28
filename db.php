@@ -41,5 +41,19 @@ function db_query_select($query_select,$mysqli){
     }
     return $response;
 }
+function db_query_insert($query_insert,$mysqli){
+    if (!$resultado = $mysqli->query($query_insert)) {
+        $response['error'] = true;
+        $response['msg'] = "La ejecución de la consulta falló debido a: \n";
+        $response['msg'] .= "Query, " . $query_insert . "\n";
+        $response['msg'] .= "Errno, " . $mysqli->errno . "\n";
+        $response['msg'] .= "Error, " . $mysqli->error . "\n";
+    } else {
+        $response['error'] = false;
+        $response['respuesta'] = "New record created successfully";
+    }
+    
+    return $response;
+}
 ?>
 

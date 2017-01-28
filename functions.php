@@ -80,5 +80,26 @@
         }
         return $response;
     }
+    
+    function insert_encoded_audio($transcript,$encoded_audio,$audio_file){
+        $retocado = elimina_acentos($transcript);
+        $db = db_connect();
+        if ($db['error']){
+            $response['error'] = true;
+            $response['msg'] = $db['msg'];
+        } else{
+            $sql = "INSERT INTO sp_encoded_audio (transcript, encoded_audio, audio_file) VALUES ('".$retocado."', '".$encoded_audio."', '".$audio_file."')";
+            $query_response = db_query_insert($sql, $db['conexion']);
+            if ($query_response['error']){
+                $response['error'] = true;
+                $response['msg'] = $query_response['msg'];
+            } else {
+                $response['error'] = false;
+                $response['result'] = $query_response['respuesta'];
+                db_close($db['conexion']);
+            }
+        }
+        return $response;
+    }
 ?>
 
