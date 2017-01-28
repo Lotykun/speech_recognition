@@ -1,6 +1,7 @@
 *.flac
 *.json
 tmp_audios/
+json/
 config.php
 *test*
 /nbproject/private/
