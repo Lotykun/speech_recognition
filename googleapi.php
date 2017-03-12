@@ -67,7 +67,7 @@
             } else {
                 $response['transcript'] = $transcript;
             }
-            return $transcript;
+            return $response;
         }
     }
 ?>

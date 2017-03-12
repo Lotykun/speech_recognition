@@ -34,7 +34,7 @@ function db_query_select($query_select,$mysqli){
     }
     if ($resultado->num_rows === 0) {
         $response['error'] = true;
-        $response['msg'] = "La ejecución de la consulta devolvio cero resultados\n";
+        $response['msg'] = "cero resultados\n";
     } else {
         $response['error'] = false;
         $response['result'] = $resultado->fetch_assoc();

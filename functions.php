@@ -61,20 +61,23 @@
 
     function get_iRespuesta($transcript){
         
-        $retocado = elimina_acentos($transcript);
         $db = db_connect();
         if ($db['error']){
             $response['error'] = true;
-            $response['msg'] = $db['msg'];
+            $response['error_msg'] = $db['msg'];
         } else{
-            $sql = 'SELECT respuesta FROM dialogo WHERE pregunta="'.$retocado.'"';
+            $sql = 'SELECT type, pregunta, respuesta FROM sp_dialogo WHERE pregunta="'.$transcript.'"';
             $query_response = db_query_select($sql, $db['conexion']);
             if ($query_response['error']){
                 $response['error'] = true;
-                $response['msg'] = $query_response['msg'];
+                $response['error_msg'] = $query_response['msg'];
             } else {
                 $response['error'] = false;
-                $response['result'] = $query_response['result']['respuesta'];
+                if ($response['result']['type'] == 0){
+                    $response['result'] = $query_response['result']['respuesta'];
+                } else if ($response['result']['type'] == 1){
+                    $response['result'] = $query_response['result']['pregunta'];
+                }
                 db_close($db['conexion']);
             }
         }
